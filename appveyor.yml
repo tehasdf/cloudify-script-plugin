@@ -1,15 +1,20 @@
 
 environment:
+
+  TOX_ENV: pywin
+
     matrix:
         - PYTHON: "C:\\Python27"
           PYTHON_VERSION: "2.7.x" # currently 2.7.9
           PYTHON_ARCH: "32"
 
 version: 1.0.{build}
+build: off
 branches:
     only:
         - test-appveyor
     
+
 install:
     # Prepend newly installed Python to the PATH of this build (this cannot be
     # done from inside the powershell script as it would require to restart
@@ -23,10 +28,15 @@ install:
     # Upgrade to the latest version of pip to avoid it displaying warnings
     # about it being out of date.
     - "pip install --disable-pip-version-check --user --upgrade pip"  
-    - "pip install -r dev-requirements.txt"
-    - "pip install tox"
 
-build: off
+
+before_test:
+    - pip install virtualenv --upgrade
+    - virtualenv --version
+    - virtualenv env
+    - 'env\Scripts\activate.bat'
+    - echo Installing tox
+    - pip install tox
 
 test_script:
-    - ps: tox
+    - tox -e %TOX_ENV%
