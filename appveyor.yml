@@ -9,13 +9,13 @@ environment:
 
     matrix:
         - PYTHON: "C:\\Python27"
-            PYTHON_VERSION: "2.7.x" # currently 2.7.9
-            PYTHON_ARCH: "32"
+          PYTHON_VERSION: "2.7.x" # currently 2.7.9
+          PYTHON_ARCH: "32"
 
 version: 1.0.{build}
 branches:
     only:
-    - test-appveyor
+        - test-appveyor
     
 install:
     - ECHO "Filesystem root:"
@@ -41,7 +41,7 @@ install:
     - "pip install --disable-pip-version-check --user --upgrade pip"  
     - "CMD_IN_ENV pip install -r dev-requirements.txt"
     - "CMD_IN_ENV pip install tox"
-    
+
 build: off
 
 test_script:
