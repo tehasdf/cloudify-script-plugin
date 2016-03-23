@@ -283,7 +283,7 @@ class TestScriptRunner(testtools.TestCase):
             '''.format(abort_message, log_path),
             # not actually tested
             windows_script='''
-            ctx abort_operation 'oops'
+            ctx abort_operation "{0}"
             '''.format(abort_message))
         self.assertRaises(NonRecoverableError,
                           self._run,
