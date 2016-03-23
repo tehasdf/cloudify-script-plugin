@@ -1,8 +1,5 @@
 
 environment:
-
-    TOX_ENV: pywin
-
     matrix:
         - PYTHON: "C:\\Python27"
           PYTHON_VERSION: "2.7.x" # currently 2.7.9
@@ -39,4 +36,4 @@ before_test:
     - pip install tox
 
 test_script:
-    - tox -e %TOX_ENV%
+    - tox
