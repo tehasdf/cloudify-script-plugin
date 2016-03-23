@@ -1,5 +1,6 @@
 
 environment:
+    TOX_ENV: pywin
     matrix:
         - PYTHON: "C:\\Python27"
           PYTHON_VERSION: "2.7.x" # currently 2.7.9
@@ -13,14 +14,7 @@ branches:
     
 
 install:
-    # Prepend newly installed Python to the PATH of this build (this cannot be
-    # done from inside the powershell script as it would require to restart
-    # the parent CMD process).
     - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-
-    # Check that we have the expected version and architecture for Python
-    - "python --version"
-    - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
 
     # Upgrade to the latest version of pip to avoid it displaying warnings
     # about it being out of date.
@@ -36,4 +30,4 @@ before_test:
     - pip install tox
 
 test_script:
-    - tox
+    - tox -e %TOX_ENV%
